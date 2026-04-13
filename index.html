@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Translator</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            width: 90%;
+            max-width: 500px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            background: #000;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 10px;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #00ff41;
+            color: #000;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background: #00cc33;
+        }
+        .output {
+            margin-top: 1rem;
+            padding: 10px;
+            border: 1px dashed #00ff41;
+            min-height: 50px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>SYSTEM.TRANSLATE</h2>
+    <label>INPUT BINARY:</label>
+    <textarea id="binaryInput" placeholder="Enter binary (e.g. 01001000 01101001)"></textarea>
+    
+    <button onclick="translateBinary()">Decode</button>
+    
+    <label style="display:block; margin-top:1rem;">ENGLISH OUTPUT:</label>
+    <div id="englishOutput" class="output"></div>
+</div>
+
+<script>
+    function translateBinary() {
+        const input = document.getElementById('binaryInput').value.trim();
+        const outputDiv = document.getElementById('englishOutput');
+        
+        try {
+            const english = input.split(' ').map(bin => {
+                return String.fromCharCode(parseInt(bin, 2));
+            }).join('');
+            
+            outputDiv.innerText = english || "Waiting for valid input...";
+        } catch (e) {
+            outputDiv.innerText = "Error: Invalid Binary Format";
+        }
+    }
+</script>
+
+</body>
+</html>
